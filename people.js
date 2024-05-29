@@ -166,7 +166,6 @@ let PEOPLE = {
     "TOKiMONSTA": 1,
     "Tale of Us": 2,
     "Tchami": 1,
-    "Testpilot": 1,
     "The Avalanches": 2,
     "The Blessed Madonna": 1,
     "The Chemical Brothers": 2,
