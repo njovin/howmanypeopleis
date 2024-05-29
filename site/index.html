@@ -1,0 +1,36 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/neobrutalismcss@latest" />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="/people.js"></script>
+    <link rel='stylesheet' id='wp-mediaelement-css' href='style.css' type='text/css' media='all' />
+    <script>
+        document.addEventListener('alpine:init', function () {
+            Alpine.store('data', {
+                search: '',
+                get filteredPeople() {
+                    return PEOPLE.filter((person) => {
+                        console.log(person);
+                        return this.search.length > 2 && person.name.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().includes(this.search.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase());
+                    });
+                },
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container" x-data >
+    <h1 class="section">how many people is</h1>
+    <div class="section">
+        <input class="nb-input" placeholder="enter an artist" type="text" x-model.debounce.50ms="$store.data.search">
+    </div>
+    <ul class="section">
+        <template x-for="person in $store.data.filteredPeople">
+            <div class="alert success">
+                <p x-text="person.name + ' is ' + person.peopleCount + (person.peopleCount > 1 ? ' people' : ' person')"></p>
+            </div>
+        </template>
+    </ul>
+</div>
+</body>
+</html>

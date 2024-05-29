@@ -1,0 +1,8 @@
+services:
+  howmanypeopleis-web:
+    image: nginx:latest
+    ports:
+      - '${HOWMANYPEOPLEIS_PORT:-9292}:80'
+    volumes:
+      - .:/code
+      - ./site.conf:/etc/nginx/conf.d/default.conf
