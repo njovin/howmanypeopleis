@@ -15,18 +15,39 @@
                 <div class="alert success">
                     <p x-text="person + ' is ' + people[person] + (people[person] > 1 ? ' people' : ' person')"></p>
                 </div>
-                <template x-for="alias in aliases(person)">
-                    <div class="alert info three-quarter-width">
-                        <p x-text="'...aka ' + alias"></p>
-                    </div>
-                </template>
+                <div class="alert info three-quarter-width" x-show="aliases(person).length > 0">
+                    <p>...aka
+                        <template x-for="(alias, i) in aliases(person)">
+                            <span>
+                                <span class='clickable' x-text="alias" @click="search = alias"></span>
+                                <span x-show="i < aliases(person).length - 1"> and </span>
+                            </span>
+                        </template>
+                    </p>
+                </div>
                 <template x-for="group in groups(person)">
                     <div class="alert info three-quarter-width">
-                        <p x-text="group"></p>
+                        <p>
+                            ...and is 1/<span x-text="group.members.length + 1"></span> of
+                            <span class='clickable' x-text="group.name" @click="search = group.name"></span> with
+                            <template x-for="(member, i) in group.members">
+                                <span>
+                                    <span x-text="member" class="clickable" @click="search = member"></span>
+                                    <span x-show="i < group.members.length - 1"> and </span>
+                                </span>
+                            </template>
+                        </p>
                     </div>
                 </template>
-                <div class="alert info three-quarter-width" x-show="members(person)">
-                    <p x-text="members(person)"></p>
+                <div class="alert info three-quarter-width" x-show="members(person).length > 0">
+                    <p>
+                        <template x-for="(member, i) in members(person)">
+                            <span>
+                                <span x-text="member" class="clickable" @click="search = member"></span>
+                                <span x-show="i < members(person).length - 1"> and </span>
+                            </span>
+                        </template>
+                    </p>
                 </div>
             </div>
         </template>
@@ -55,14 +76,14 @@
                 for (const i in Object.keys(GROUPS)) {
                     group = Object.keys(GROUPS)[i];
                     if (GROUPS[group].includes(person)) {
-                        groups.push(`...and is 1/${GROUPS[group].length} of ${group} with ${GROUPS[group].filter(member => member != person).join(' and ')}`);
+                        groups.push({name: group, members: GROUPS[group].filter(member => member != person)});
                     }
                 }
                 return groups;
             },
             members: function (person) {
-                if (!GROUPS[person]) return null;
-                return GROUPS[person].join(' and ');
+                if (!GROUPS[person]) return [];
+                return GROUPS[person];
             },
             aliases: function (person) {
                 for (let i = 0; i < ALIASES.length; i++) {

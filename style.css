@@ -37,6 +37,11 @@
     padding: 0;
 }
 
+.clickable {
+    cursor: pointer;
+    border-bottom: 1px dotted #000;
+    text-decoration: none;
+}
 input {
     width: 100%;
     text-align: center;
