@@ -17,6 +17,10 @@
     margin-right: auto;
 }
 
+.middle {
+    flex-grow: 2
+}
+
 input {
     width: 100%;
     text-align: center;

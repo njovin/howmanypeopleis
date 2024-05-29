@@ -23,13 +23,16 @@
     <div class="section">
         <input class="nb-input" placeholder="enter an artist" type="text" x-model.debounce.50ms="$store.data.search">
     </div>
-    <ul class="section">
+    <ul class="section middle">
         <template x-for="person in $store.data.filteredPeople">
             <div class="alert success">
                 <p x-text="person.name + ' is ' + person.peopleCount + (person.peopleCount > 1 ? ' people' : ' person')"></p>
             </div>
         </template>
     </ul>
+    <div class="section">
+        <a href="https://github.com/njovin/howmanypeopleis">github</a>
+    </div>
 </div>
 </body>
 </html>
