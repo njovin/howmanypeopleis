@@ -1,38 +1,79 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://unpkg.com/neobrutalismcss@latest" />
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="/people.js"></script>
     <link rel='stylesheet' id='wp-mediaelement-css' href='style.css' type='text/css' media='all' />
-    <script>
-        document.addEventListener('alpine:init', function () {
-            Alpine.store('data', {
-                search: '',
-                get filteredPeople() {
-                    return PEOPLE.filter((person) => {
-                        return this.search.length > 2 && person.name.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().includes(this.search.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase());
-                    });
-                },
-            });
-        });
-    </script>
 </head>
 <body>
-<div class="container" x-data >
+<div class="container" x-data="data">
     <h1 class="section">how many people is</h1>
     <div class="section">
-        <input class="nb-input" placeholder="enter an artist" type="text" x-model.debounce.50ms="$store.data.search">
+        <input class="nb-input" placeholder="enter an artist" type="text" x-model.debounce.50ms="search">
     </div>
-    <ul class="section middle">
-        <template x-for="person in $store.data.filteredPeople">
-            <div class="alert success">
-                <p x-text="person.name + ' is ' + person.peopleCount + (person.peopleCount > 1 ? ' people' : ' person')"></p>
+    <div class="section middle">
+        <template x-for="person in filteredPeople">
+            <div>
+                <div class="alert success">
+                    <p x-text="person + ' is ' + people[person] + (people[person] > 1 ? ' people' : ' person')"></p>
+                </div>
+                <template x-for="alias in aliases(person)">
+                    <div class="alert info three-quarter-width">
+                        <p x-text="'...aka ' + alias"></p>
+                    </div>
+                </template>
+                <template x-for="group in groups(person)">
+                    <div class="alert info three-quarter-width">
+                        <p x-text="group"></p>
+                    </div>
+                </template>
+                <div class="alert info three-quarter-width" x-show="members(person)">
+                    <p x-text="members(person)"></p>
+                </div>
             </div>
         </template>
-    </ul>
+    </div>
     <div class="section">
         <a href="https://github.com/njovin/howmanypeopleis">github</a>
     </div>
 </div>
+
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script src="/people.js"></script>
+<script>
+    document.addEventListener('alpine:init', function () {
+        Alpine.data('data', () => ({
+            // Alpine.store('data', {
+            search: '',
+            people: PEOPLE,
+            get filteredPeople() {
+                return Object.keys(PEOPLE).filter((person) => {
+                    return this.search.length > 2 && person.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().includes(this.search.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase());
+                });
+            },
+            groups: function (person) {
+                let group = null;
+                let groups = [];
+                for (const i in Object.keys(GROUPS)) {
+                    group = Object.keys(GROUPS)[i];
+                    if (GROUPS[group].includes(person)) {
+                        groups.push(`...and is 1/${GROUPS[group].length} of ${group} with ${GROUPS[group].filter(member => member != person).join(' and ')}`);
+                    }
+                }
+                return groups;
+            },
+            members: function (person) {
+                if (!GROUPS[person]) return null;
+                return GROUPS[person].join(' and ');
+            },
+            aliases: function (person) {
+                for (let i = 0; i < ALIASES.length; i++) {
+                    if (ALIASES[i].includes(person)) {
+                        return ALIASES[i].filter(alias => alias != person);
+                    }
+                }
+                return [];
+            },
+        }));
+    });
+</script>
 </body>
 </html>
