@@ -6,14 +6,15 @@
 <body>
 <div class="container" x-data="data">
     <h1 class="section">how many people is</h1>
-    <div class="section">
+    <div class="section form">
         <input class="nb-input" placeholder="enter an artist" type="text" x-model.debounce.50ms="search">
+        <button @click="getRandom()" class="nb-button green">surprise me</button>
     </div>
     <div class="section middle">
         <template x-for="person in filteredPeople">
             <div>
                 <div class="alert success">
-                    <p x-text="person + ' is ' + people[person] + (people[person] > 1 ? ' people' : ' person')"></p>
+                    <p x-text="person + ' is ' + people[person] + (people[person] == 1 ? ' person' : ' people')"></p>
                 </div>
                 <div class="alert info three-quarter-width" x-show="aliases(person).length > 0">
                     <p>...aka
@@ -93,6 +94,10 @@
                 }
                 return [];
             },
+            getRandom: function() {
+                let personIndex = Math.floor(Math.random() * Object.keys(PEOPLE).length);
+                this.search = Object.keys(PEOPLE)[personIndex];
+            }
         }));
     });
 </script>
