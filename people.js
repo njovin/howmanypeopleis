@@ -6,6 +6,7 @@ let PEOPLE = {
     "Above & Beyond": 3,
     "Adam Beyer": 1,
     "Alison Wonderland": 1,
+    "Animal Riot": 2,
     "Anti Up": 2,
     "Anyma": 1,
     "Aphex Twin": 1,
@@ -137,6 +138,7 @@ let PEOPLE = {
     "Reinier Zonneveld": 1,
     "Rezz": 1,
     "Richie Hawtin": 1,
+    "Ricky": 1,
     "Romy": 1,
     "Rossi.": 1,
     "Rüfüs Du Sol": 3,
@@ -180,10 +182,12 @@ let PEOPLE = {
     "Walker & Royce": 2,
     "Wax Motif": 1,
     "Yotto": 1,
+    "Zach2Mundo": 1,
     "Zedd": 1,
 };
 
 let GROUPS = {
+    "Animal Riot": ["Zach2Mundo", "Ricky"],
     "TBA": ["Skrillex", "Fred Again", "Four Tet"],
     "Anti Up": ["Chris Lake", "Chriz Lorenzo"],
     "Tale of Us": ["Anyma", "MRAK"],
