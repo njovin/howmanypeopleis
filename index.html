@@ -10,7 +10,6 @@
                 search: '',
                 get filteredPeople() {
                     return PEOPLE.filter((person) => {
-                        console.log(person);
                         return this.search.length > 2 && person.name.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().includes(this.search.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase());
                     });
                 },
