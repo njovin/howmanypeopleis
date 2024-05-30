@@ -188,7 +188,7 @@ let PEOPLE = {
 
 let GROUPS = {
     "Animal Riot": ["Zach2Mundo", "Ricky"],
-    "TBA": ["Skrillex", "Fred Again", "Four Tet"],
+    "TBA": ["Skrillex", "Fred Again..", "Four Tet"],
     "Anti Up": ["Chris Lake", "Chriz Lorenzo"],
     "Tale of Us": ["Anyma", "MRAK"],
     "Swedish House Mafia": ["Axwell", "Steve Angello", "Sebastian Ingrosso"],
