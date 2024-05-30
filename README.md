@@ -1,5 +1,9 @@
-# howmanypeopleis
+# https://howmanypeople.is
 
 This is a silly project to show you how many people are in a musical group.  
 
-It's poorly-coded and inefficient.  Feel free to contribute.
+There isn't much data yet.
+
+It's poorly-coded and inefficient.  
+
+Feel free to contribute.
