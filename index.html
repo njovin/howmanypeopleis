@@ -67,7 +67,7 @@
             people: PEOPLE,
             get filteredPeople() {
                 return Object.keys(PEOPLE).filter((person) => {
-                    return this.search.length > 2 && person.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().includes(this.search.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase());
+                    return this.search.length > 1 && person.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().includes(this.search.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase());
                 });
             },
             groups: function (person) {
