@@ -1,4 +1,4 @@
-# howmanypeopleis
+# https://howmanypeople.is
 
 This is a silly project to show you how many people are in a musical group.  
 
