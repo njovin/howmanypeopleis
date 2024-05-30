@@ -97,7 +97,7 @@ let PEOPLE = {
     "Lane 8": 1,
     "Lee Burridge": 1,
     "Lewis OfMan": 1,
-    "Louis the Child":  3,
+    "Louis the Child":  2,
     "Luke Alessi": 1,
     "MK": 1,
     "MRAK": 1,
